@@ -1,0 +1,5 @@
+O Saldo e: 0
+O valor Creditado foi: 100
+O Saldo e: 100
+O valor Debitado foi: 50
+O Saldo e: 50
