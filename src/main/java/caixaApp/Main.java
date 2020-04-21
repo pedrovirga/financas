@@ -25,8 +25,8 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage){
 
-		Calculations c = new Calculations();
-		Scene scene = new Scene(basicConf(c) , 753 , 377);
+		Calculations calculoFluxo = new Calculations();
+		Scene scene = new Scene(basicConf(calculoFluxo) , 753 , 377);
 		primaryStage.setTitle("Caixa");
 		primaryStage.setScene(scene);
 		scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
@@ -34,65 +34,65 @@ public class Main extends Application{
 		primaryStage.show();
 	}
 
-	public GridPane basicConf( Calculations c){
+	public GridPane basicConf(Calculations calculoFluxo){
 
 		/* Configura a tela */
-		GridPane g = new GridPane();
-		g.setHalignment(g , HPos.CENTER);
-		g.setHgap(10);
-		g.setVgap(10);
-		g.setPadding(new Insets(20 , 20 , 20 , 20)); /*Mudar a posicao*/
+		GridPane layout = new GridPane();
+		layout.setHalignment(layout , HPos.CENTER);
+		layout.setHgap(10);
+		layout.setVgap(10);
+		layout.setPadding(new Insets(20 , 20 , 20 , 20)); /*Mudar a posicao*/
 
 		/* Configura o texto */
-		Text t = new Text("Caixa");
-		t.setId("caixa-text");
-		g.add(t , 0 , 0 , 2 , 1);
+		Text title = new Text("Caixa");
+		title.setId("caixa-text");
+		layout.add(title , 0 , 0 , 2 , 1);
 
-		Label l = new Label("Adicionar o valor:");
-		l.setId("label-text");
-		g.add(l , 0 , 1); /* coluna 0 e linha 1*/
+		Label addValueText = new Label("Adicionar o valor:");
+		addValueText.setId("label-text");
+		layout.add(addValueText , 0 , 1); /* coluna 0 e linha 1*/
 
-		TextField tf = new TextField();
+		TextField addValueField = new TextField();
 
-		Label ll = new Label("Retirar o valor:");
-		ll.setId("label-text");
-		g.add(ll , 0 , 2);
+		Label subValueText = new Label("Retirar o valor:");
+		subValueText.setId("label-text");
+		layout.add(subValueText , 0 , 2);
 
-		TextField tff = new TextField();
+		TextField subValueField = new TextField();
 
-		Label lll = new Label("Saldo:");
-		lll.setId("label-text");
-		g.add(lll , 0 , 3);
+		Label balanceValueText = new Label("Saldo:");
+		balanceValueText.setId("label-text");
+		layout.add(balanceValueText , 0 , 3);
 
-		TextField tfff = new TextField();
-		tfff.setEditable(false);
-		tfff.setText(c.getSaldo());
+		TextField balanceValueField = new TextField();
+		balanceValueField.setEditable(false);
+		balanceValueField.setText(calculoFluxo.getSaldo());
 
-		tf.setOnAction(new EventHandler<ActionEvent>() {
+		addValueField.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event){
-				System.out.println("O valor adicionado " + tf.getText());
-				c.addValor(tf.getText());
-				tfff.setText(c.getSaldo());
-				tf.clear();
+				System.out.println("O valor adicionado " + addValueField.getText());
+				calculoFluxo.addValor(addValueField.getText());
+				balanceValueField.setText(calculoFluxo.getSaldo());
+				addValueField.clear();
 			}
 		});
 
-		tff.setOnAction(new EventHandler<ActionEvent>() {
+		subValueField.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event){
-				System.out.println("O valor retirado " + tff.getText());
-				c.removeValor(tff.getText());
-				tfff.setText(c.getSaldo());
-				tff.clear();
+				System.out.println("O valor retirado " + subValueField.getText());
+				calculoFluxo.removeValor(subValueField.getText());
+				balanceValueField.setText(calculoFluxo.getSaldo());
+				subValueField.clear();
 			}
 		});
 
-		g.add(tf , 1 , 1);
-		g.add(tff , 1 , 2);
-		g.add(tfff , 1 , 3);
+		layout.add(addValueField , 1 , 1);
+		layout.add(subValueField , 1 , 2);
+		layout.add(balanceValueField , 1 , 3);
 
-		return g;
+		return layout;
 	}
 
 	private class Calculations{
