@@ -32,41 +32,81 @@ public class Main extends Application{
 		scene.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
 
 		primaryStage.show();
+
+		//Scene scene = new Scene(  ,753 , 377);
+
+	}
+
+	public HBox SceneTransition(){
+		HBox hbox = new HBox();
+    hbox.setPadding(new Insets(15, 12, 15, 12));
+    hbox.setSpacing(10);
+    hbox.setStyle("-fx-background-color: #336699;");
+
+    Button buttonCurrent = new Button("Caixa");
+    buttonCurrent.setPrefSize(100, 20);
+
+    Button buttonProjected = new Button("Compromissos");
+    buttonProjected.setPrefSize(100, 20);
+    hbox.getChildren().addAll(buttonCurrent, buttonProjected);
+
+    return hbox;
 	}
 
 	public GridPane basicConf(Calculations calculoFluxo){
 
 		/* Configura a tela */
 		GridPane layout = new GridPane();
+		HBox hbox = SceneTransition();
+
 		layout.setHalignment(layout , HPos.CENTER);
 		layout.setHgap(10);
 		layout.setVgap(10);
 		layout.setPadding(new Insets(20 , 20 , 20 , 20)); /*Mudar a posicao*/
 
+		ColumnConstraints colOne = new ColumnConstraints();
+		ColumnConstraints colTwo = new ColumnConstraints();
+		ColumnConstraints colThree = new ColumnConstraints(50 , 50 , 50);
+		/* was necessary to separate one column to adust*/
+		colThree.setHgrow(Priority.ALWAYS);
+		layout.getColumnConstraints().addAll(colOne , colTwo , colThree);
+
+		layout.add(hbox , 0 , 0 , 4 , 1); /* coluna ,  linha , linhas , colunas */
+
 		/* Configura o texto */
 		Text title = new Text("Caixa");
 		title.setId("caixa-text");
-		layout.add(title , 0 , 0 , 2 , 1);
+		layout.add(title , 0 , 1 , 2 , 1);
 
-		Label addValueText = new Label("Adicionar o valor:");
+		Label addValueText = new Label("Adicionar o valor");
 		addValueText.setId("label-text");
-		layout.add(addValueText , 0 , 1); /* coluna 0 e linha 1*/
+		layout.add(addValueText , 0 , 3); /* coluna 0 e linha 2*/
 
 		TextField addValueField = new TextField();
 
-		Label subValueText = new Label("Retirar o valor:");
+		Label subValueText = new Label("Retirar o valor");
 		subValueText.setId("label-text");
-		layout.add(subValueText , 0 , 2);
+		layout.add(subValueText , 0 , 4);
+		layout.setHalignment(subValueText, HPos.RIGHT);
 
 		TextField subValueField = new TextField();
 
-		Label balanceValueText = new Label("Saldo:");
+		Label balanceValueText = new Label("Saldo");
 		balanceValueText.setId("label-text");
-		layout.add(balanceValueText , 0 , 3);
+		layout.add(balanceValueText , 0 , 5);
+		layout.setHalignment(balanceValueText, HPos.RIGHT);
 
 		TextField balanceValueField = new TextField();
 		balanceValueField.setEditable(false);
 		balanceValueField.setText(calculoFluxo.getSaldo());
+
+		Label descriptionValueText = new Label("Descricao");
+		descriptionValueText.setId("label-text");
+		layout.add(descriptionValueText , 3 , 3);
+
+		TextField descriptionValueField = new TextField();
+		descriptionValueField.setMinSize(250,100);
+
 
 		addValueField.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -88,9 +128,10 @@ public class Main extends Application{
 			}
 		});
 
-		layout.add(addValueField , 1 , 1);
-		layout.add(subValueField , 1 , 2);
-		layout.add(balanceValueField , 1 , 3);
+		layout.add(addValueField , 1 , 3);
+		layout.add(subValueField , 1 , 4);
+		layout.add(balanceValueField , 1 , 5);
+		layout.add(descriptionValueField, 3 , 4 , 2 , 2);
 
 		return layout;
 	}
