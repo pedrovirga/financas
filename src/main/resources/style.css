@@ -1,6 +1,8 @@
 
 .root {
-	-fx-background-image: url("empresas.jpg");
+	-fx-background-image: url("money.png");
+	-fx-background-color: lightcyan;
+	-fx-background-position: center center;
 	-fx-background-repeat: no-repeat;
 
 }
@@ -9,12 +11,12 @@
 	-fx-font-size: 32px;
    	-fx-font-family: "Arial Black";
    	-fx-fill: #818181;
-   	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );	
+   	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 
 #label-text{
 	-fx-font-size: 16px;
    	-fx-font-family: "Arial Black";
    	-fx-fill: #818181;
-   	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );	
+   	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }

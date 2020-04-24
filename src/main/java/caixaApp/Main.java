@@ -36,12 +36,13 @@ public class Main extends Application{
 		//Scene scene = new Scene(  ,753 , 377);
 
 	}
-
+	/* @Description: It has buttons to perfom a scene transition */
 	public HBox SceneTransition(){
 		HBox hbox = new HBox();
     hbox.setPadding(new Insets(15, 12, 15, 12));
     hbox.setSpacing(10);
     hbox.setStyle("-fx-background-color: #336699;");
+		hbox.setAlignment(Pos.TOP_RIGHT);
 
     Button buttonCurrent = new Button("Caixa");
     buttonCurrent.setPrefSize(100, 20);
@@ -62,16 +63,22 @@ public class Main extends Application{
 		layout.setHalignment(layout , HPos.CENTER);
 		layout.setHgap(10);
 		layout.setVgap(10);
-		layout.setPadding(new Insets(20 , 20 , 20 , 20)); /*Mudar a posicao*/
+		layout.setPadding(new Insets(20 , 20 , 20 , 20));
 
+		/* Ajust size of grids */
 		ColumnConstraints colOne = new ColumnConstraints();
 		ColumnConstraints colTwo = new ColumnConstraints();
-		ColumnConstraints colThree = new ColumnConstraints(50 , 50 , 50);
-		/* was necessary to separate one column to adust*/
-		colThree.setHgrow(Priority.ALWAYS);
-		layout.getColumnConstraints().addAll(colOne , colTwo , colThree);
+		ColumnConstraints colThree = new ColumnConstraints();
+		ColumnConstraints colFour = new ColumnConstraints(50 , 50 ,50);
+		ColumnConstraints colFive = new ColumnConstraints(200 , 200 , 200);
 
-		layout.add(hbox , 0 , 0 , 4 , 1); /* coluna ,  linha , linhas , colunas */
+		/* set Priority to maintain grip size`s config */
+		colFour.setHgrow(Priority.ALWAYS);
+		colFive.setHgrow(Priority.ALWAYS);
+
+		layout.getColumnConstraints().addAll(colOne , colTwo , colThree , colFour , colFive);
+
+		layout.add(hbox , 0 , 0 , 6 , 1); /* column ,  line , line to grow , column to grow */
 
 		/* Configura o texto */
 		Text title = new Text("Caixa");
@@ -84,12 +91,18 @@ public class Main extends Application{
 
 		TextField addValueField = new TextField();
 
+		Button buttonAdd = new Button("Adicionar");
+    buttonAdd.setId("button-text");
+
 		Label subValueText = new Label("Retirar o valor");
 		subValueText.setId("label-text");
 		layout.add(subValueText , 0 , 4);
 		layout.setHalignment(subValueText, HPos.RIGHT);
 
 		TextField subValueField = new TextField();
+
+		Button buttonSub = new Button("Retirar");
+    buttonSub.setId("button-text");
 
 		Label balanceValueText = new Label("Saldo");
 		balanceValueText.setId("label-text");
@@ -102,11 +115,13 @@ public class Main extends Application{
 
 		Label descriptionValueText = new Label("Descricao");
 		descriptionValueText.setId("label-text");
-		layout.add(descriptionValueText , 3 , 3);
+		layout.add(descriptionValueText , 4 , 3);
+		layout.setHalignment(descriptionValueText, HPos.CENTER);
 
 		TextField descriptionValueField = new TextField();
-		descriptionValueField.setMinSize(250,100);
-
+		descriptionValueField.setMinSize(100 , 100);
+		descriptionValueField.setPrefSize(150 , 150);
+		descriptionValueField.setMaxSize(200 , 200);
 
 		addValueField.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -128,10 +143,17 @@ public class Main extends Application{
 			}
 		});
 
+		/*              TextFields               */
 		layout.add(addValueField , 1 , 3);
 		layout.add(subValueField , 1 , 4);
 		layout.add(balanceValueField , 1 , 5);
-		layout.add(descriptionValueField, 3 , 4 , 2 , 2);
+		layout.add(descriptionValueField, 4 , 4 , 5 , 3);
+		/*****************************************/
+
+		/*               Buttons                 */
+		layout.add(buttonAdd , 2 , 3);
+		layout.add(buttonSub , 2 , 4);
+		/*****************************************/
 
 		return layout;
 	}
