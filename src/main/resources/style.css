@@ -20,3 +20,18 @@
    	-fx-fill: #818181;
    	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
+
+#button-text-add{
+    -fx-font-size: 11px;
+    -fx-font-family: "Arial";
+}
+#button-text-sub{
+    -fx-font-size: 11px;
+    -fx-font-family: "Arial";
+}
+
+#upperButton-text{
+    -fx-font-size: 11px;
+    -fx-font-family: "Arial";
+    -fx-border-radius: 20;
+}
