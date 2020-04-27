@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
+import javafx.scene.shape.Circle;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -131,7 +132,8 @@ public class Telas extends UpperButtons{
         TextField addValueField = new TextField();
         addValueField.setText("0");
 
-        Button buttonAdd = new Button("Adicionar");
+        Button buttonAdd = new Button();
+        buttonAdd.setShape(new Circle(30));
         buttonAdd.setId("button-text-add");
         /******************************************/
 
@@ -145,7 +147,8 @@ public class Telas extends UpperButtons{
         TextField subValueField = new TextField();
         subValueField.setText("0");
 
-        Button buttonSub = new Button("Retirar");
+        Button buttonSub = new Button();
+        buttonSub.setShape(new Circle(30));
         buttonSub.setId("button-text-sub");
         /*******************************************/
 

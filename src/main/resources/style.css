@@ -22,12 +22,21 @@
 }
 
 #button-text-add{
-    -fx-font-size: 11px;
-    -fx-font-family: "Arial";
+	-fx-min-width: 25px;
+	-fx-background-image: url('plus.png');
+	-fx-background-radius: 100%;
+	-fx-background-size: cover;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+
 }
 #button-text-sub{
-    -fx-font-size: 11px;
-    -fx-font-family: "Arial";
+	-fx-min-width: 25px;
+	-fx-background-image: url('minus.png');
+	-fx-background-radius: 100%;
+	-fx-background-size: cover;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
 }
 
 #upperButton-text{
