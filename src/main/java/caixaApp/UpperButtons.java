@@ -1,8 +1,8 @@
 package caixaApp;
 
-import manipulate.*;
+//import manipulate.*;
 
-import javafx.application.Application;
+//import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,10 +11,6 @@ import javafx.stage.Stage;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.io.*;
 
 /*Botoẽs "Caixa" e "Compromissos"*/
 

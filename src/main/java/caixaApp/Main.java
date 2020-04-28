@@ -4,26 +4,19 @@ package caixaApp;
  Main.java
 */
 
-import manipulate.*;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.io.*;
 
 public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage){
+
+		Font.loadFont(getClass().getResourceAsStream("/Acme-Regular.ttf"), 30);
 
 		//Calculations calculoFluxo = new Calculations();
 		Telas telas = new Telas(primaryStage);
