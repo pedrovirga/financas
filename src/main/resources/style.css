@@ -1,8 +1,9 @@
 
 .root {
-	-fx-background-image: url("money.png");
+	-fx-background-image: url("money.jpeg");
 	-fx-background-color: lightcyan;
 	-fx-background-position: center center;
+	-fx-background-size: 50%;
 	-fx-background-repeat: no-repeat;
 }
 
