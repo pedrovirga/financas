@@ -7,7 +7,7 @@
 	-fx-background-repeat: no-repeat;
 }
 
-#caixa-text{
+#title-text{
 	-fx-font-size: 32px;
  	-fx-font-family: "Arial Black";
  	-fx-fill: #818181;
@@ -41,4 +41,18 @@
     -fx-font-size: 11px;
     -fx-font-family: "Arial";
     -fx-border-radius: 20;
+}
+
+#side-search-button{
+	-fx-min-width: 25px;
+	-fx-background-image: url('lupa.png');
+	-fx-background-radius: 100%;
+	-fx-background-size: cover;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
+#set-border{
+	-fx-border-color: black;
+	-fx-grid-lines-visible: true;
 }

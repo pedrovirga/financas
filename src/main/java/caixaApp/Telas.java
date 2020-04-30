@@ -19,7 +19,7 @@ import java.io.*;
 
 
 public class Telas extends UpperButtons{
-    Scene login, principal;
+    Scene login, principal, compromissos;
     Calculations calcFluxo;
 
     //construtor das telas até agora feitas
@@ -28,6 +28,7 @@ public class Telas extends UpperButtons{
         calcFluxo = new Calculations();
         this.login = new Scene(telaLogin(primaryStage), 753, 377);
         this.principal = new Scene(basicConf(calcFluxo), 753, 377);
+        this.compromissos = new Scene(compScreen() , 753 , 377);
     }
 
 
@@ -71,9 +72,8 @@ public class Telas extends UpperButtons{
                 /*Ainda falta configurar a parte de acesso ao arquivo para login*/
                 Stage telaTransacao = new Stage();
                 telaTransacao.setTitle("Caixa");
-                Scene principal = new Scene(basicConf(calcFluxo), 753, 377);
-                telaTransacao.setScene(principal);
-                principal.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
+                telaTransacao.setScene(compromissos); /* change compromissos for principal after*/
+                compromissos.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
                 telaTransacao.show();
                 primaryStage.hide();
             }
@@ -116,11 +116,11 @@ public class Telas extends UpperButtons{
 
         layout.getColumnConstraints().addAll(colOne, colTwo, colThree, colFour, colFive);
 
-        layout.add(upperBtn.hbox, 0, 0, 6, 1); /* column ,  line , line to grow , column to grow */
+        layout.add(upperBtn.hbox, 0, 0, 6, 1); /* column ,  line , column to grow , line to grow */
 
         /* Configura o texto */
         Text title = new Text("Caixa");
-        title.setId("caixa-text");
+        title.setId("title-text");
         layout.add(title, 0, 1, 2, 1);
 
         /******************************************/
@@ -227,10 +227,10 @@ public class Telas extends UpperButtons{
         });
         /************************************************/
     /*              TextFields               */
-        layout.add(addValueField ,1,3);
-        layout.add(subValueField ,1,4);
-        layout.add(balanceValueField ,1,5);
-        layout.add(descriptionValueField,4,4,5,3);
+        layout.add(addValueField , 1 , 3);
+        layout.add(subValueField , 1 , 4);
+        layout.add(balanceValueField , 1 , 5);
+        layout.add(descriptionValueField , 4 , 4 , 5 , 3);
     /*****************************************/
 
     /*               Buttons                 */
@@ -241,5 +241,113 @@ public class Telas extends UpperButtons{
         return layout;
     }
 
+    VBox sideToolbar(){
+      VBox vbox = new VBox(20); /* spacing 20*/
+
+      Button addButton = new Button();
+      addButton.setShape(new Circle(30));
+      addButton.setId("button-text-add");
+      Button searchButton = new Button();
+      searchButton.setShape(new Circle(30));
+      searchButton.setId("side-search-button");
+
+      vbox.getChildren().addAll(addButton, searchButton);
+
+      return vbox;
+    }
+
+
+    GridPane listId(){
+      GridPane listview = new GridPane();
+
+      listview.setId("set-border");
+
+      ColumnConstraints colOne = new ColumnConstraints(100, 100, 100);
+      ColumnConstraints colTwo = new ColumnConstraints(200 , 200 , 200);
+      ColumnConstraints colThree = new ColumnConstraints(100, 100, 100);
+      ColumnConstraints colFour = new ColumnConstraints(100, 100, 100);
+
+      /* set Priority to maintain grip size`s config */
+      colOne.setHgrow(Priority.ALWAYS);
+      colTwo.setHgrow(Priority.ALWAYS);
+      colThree.setHgrow(Priority.ALWAYS);
+      colFour.setHgrow(Priority.ALWAYS);
+
+      listview.getColumnConstraints().addAll(colOne, colTwo, colThree, colFour);
+
+      Label id = new Label("Id") , title = new Label("Titulo") ,
+      date = new Label("Data") , value = new Label("Valor");
+
+      id.setId("label-text");
+      title.setId("label-text");
+      date.setId("label-text");
+      value.setId("label-text");
+
+      listview.add(id, 0, 0);
+      listview.add(title, 1, 0);
+      listview.add(date, 2, 0);
+      listview.add(value, 3, 0);
+
+      listview.setHalignment(id, HPos.CENTER);
+      listview.setHalignment(title, HPos.CENTER);
+      listview.setHalignment(date, HPos.CENTER);
+      listview.setHalignment(value, HPos.CENTER);
+
+      Label id1 = new Label("Teste") , id2 = new Label() , id3 = new Label() ,
+      title1 = new Label() , title2 = new Label() , title3 = new Label() ,
+      date1 = new Label() , date2 = new Label() , date3 = new Label() ,
+      value1 = new Label() , value2 = new Label() , value3 = new Label() ;
+
+      listview.add(id1 , 0 , 1 );
+      listview.add(id2 , 0 , 2 );
+      listview.add(id3 , 0 , 3 );
+      listview.add(title1 , 1 , 1 );
+      listview.add(title2 , 1 , 2 );
+      listview.add(title3 , 1 , 3 );
+      listview.add(date1 , 2 , 1 );
+      listview.add(date2 , 2 , 2 );
+      listview.add(date3 , 2 , 3 );
+      listview.add(value1 , 3 , 1 );
+      listview.add(value2 , 3 , 2 );
+      listview.add(value3 , 3 , 3 );
+
+      return listview;
+    }
+
+    GridPane compScreen(){
+      GridPane layout = new GridPane();
+      UpperButtons upperBtn = new UpperButtons();
+      layout.setPadding(new Insets(20, 20, 20, 20));
+      //layout.setId("set-border");
+      upperBtn.sceneTransition();
+      layout.add(upperBtn.hbox, 0, 0, 6, 1);
+
+      ColumnConstraints colOne = new ColumnConstraints(30 , 30 , 30);
+      ColumnConstraints colTwo = new ColumnConstraints(50 , 50 , 50);
+      ColumnConstraints colThree = new ColumnConstraints(100, 100, 100); //id
+      ColumnConstraints colFour = new ColumnConstraints(200 , 200 , 200); //tit
+      ColumnConstraints colFive = new ColumnConstraints(100, 100, 100); //date
+      ColumnConstraints colSix = new ColumnConstraints(100, 100, 100); //value
+
+      /* set Priority to maintain grip size`s config */
+      colOne.setHgrow(Priority.ALWAYS);
+      colTwo.setHgrow(Priority.ALWAYS);
+      colThree.setHgrow(Priority.ALWAYS);
+      colFour.setHgrow(Priority.ALWAYS);
+      colFive.setHgrow(Priority.ALWAYS);
+      colSix.setHgrow(Priority.ALWAYS);
+
+      layout.getColumnConstraints().addAll(colOne, colTwo, colThree , colFour ,
+      colFive , colSix);
+
+      Text title = new Text("Compromissos");
+      title.setId("title-text");
+
+      layout.add(title, 0, 1, 3, 1);
+      layout.add(sideToolbar() , 1 , 3);
+      layout.add(listId() , 2 , 3 , 4 , 3 );
+
+      return layout;
+    }
 
 }
