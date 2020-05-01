@@ -18,17 +18,22 @@ import java.math.RoundingMode;
 import java.io.*;
 
 
-public class Telas extends UpperButtons{
+public class Telas {
     Scene login, principal, compromissos;
     Calculations calcFluxo;
+    Stage primaryStage;
 
     //construtor das telas até agora feitas
     public Telas(Stage primaryStage)
     {
         calcFluxo = new Calculations();
-        this.login = new Scene(telaLogin(primaryStage), 753, 377);
-        this.principal = new Scene(basicConf(calcFluxo), 753, 377);
-        this.compromissos = new Scene(compScreen() , 753 , 377);
+        login = new Scene(telaLogin(primaryStage), 753, 377);
+        principal = new Scene(basicConf(calcFluxo), 753, 377);
+        principal.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
+        compromissos = new Scene(compScreen() , 753 , 377);
+        compromissos.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
+
+        this.primaryStage = primaryStage;
     }
 
 
@@ -69,13 +74,7 @@ public class Telas extends UpperButtons{
             @Override
             public void handle(ActionEvent event)
             {
-                /*Ainda falta configurar a parte de acesso ao arquivo para login*/
-                Stage telaTransacao = new Stage();
-                telaTransacao.setTitle("Caixa");
-                telaTransacao.setScene(compromissos); /* change compromissos for principal after*/
-                compromissos.getStylesheets().add(this.getClass().getResource("/style.css").toExternalForm());
-                telaTransacao.show();
-                primaryStage.hide();
+              primaryStage.setScene(principal);
             }
         });
 
@@ -90,13 +89,43 @@ public class Telas extends UpperButtons{
         return layout;
     }
 
+    public HBox SceneTransition(){
+  		HBox hbox = new HBox();
+      hbox.setPadding(new Insets(15, 12, 15, 12));
+      hbox.setSpacing(10);
+      hbox.setStyle("-fx-background-color: #336699;");
+  		hbox.setAlignment(Pos.TOP_RIGHT);
+
+      Button buttonCurrent = new Button("Caixa");
+      buttonCurrent.setPrefSize(100, 20);
+
+      buttonCurrent.setOnAction(new EventHandler<ActionEvent>(){
+          @Override
+          public void handle(ActionEvent event){
+            primaryStage.setScene(principal);
+          }
+      });
+
+      Button buttonProjected = new Button("Compromissos");
+      buttonProjected.setPrefSize(100, 20);
+
+      buttonProjected.setOnAction(new EventHandler<ActionEvent>(){
+          @Override
+          public void handle(ActionEvent event){
+            primaryStage.setScene(compromissos);
+          }
+      });
+
+      hbox.getChildren().addAll(buttonCurrent, buttonProjected);
+
+      return hbox;
+	 }
+
     //Tela de transacoes
     public GridPane basicConf(Calculations calculoFluxo) {
 
         /* Configura a tela */
         GridPane layout = new GridPane();
-        UpperButtons upperBtn = new UpperButtons();
-        upperBtn.sceneTransition();
 
         layout.setHalignment(layout, HPos.CENTER);
         layout.setHgap(10);
@@ -116,7 +145,7 @@ public class Telas extends UpperButtons{
 
         layout.getColumnConstraints().addAll(colOne, colTwo, colThree, colFour, colFive);
 
-        layout.add(upperBtn.hbox, 0, 0, 6, 1); /* column ,  line , column to grow , line to grow */
+        layout.add(SceneTransition(), 0, 0, 6, 1); /* column ,  line , column to grow , line to grow */
 
         /* Configura o texto */
         Text title = new Text("Caixa");
@@ -316,11 +345,9 @@ public class Telas extends UpperButtons{
 
     GridPane compScreen(){
       GridPane layout = new GridPane();
-      UpperButtons upperBtn = new UpperButtons();
       layout.setPadding(new Insets(20, 20, 20, 20));
       //layout.setId("set-border");
-      upperBtn.sceneTransition();
-      layout.add(upperBtn.hbox, 0, 0, 6, 1);
+      layout.add(SceneTransition(), 0, 0, 6, 1);
 
       ColumnConstraints colOne = new ColumnConstraints(30 , 30 , 30);
       ColumnConstraints colTwo = new ColumnConstraints(50 , 50 , 50);
